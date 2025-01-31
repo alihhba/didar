@@ -1,0 +1,276 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+    font-family: "urbanist", "vazir", sans-serif;
+    height: 100%;
+}
+
+/* fonts */
+@font-face {
+    font-family: "Inter Tight";
+    font-weight: 100;
+    font-style: normal;
+    src: url("./assets/fonts/inter/Inter_18pt-Thin.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter Tight";
+    font-weight: 200;
+    font-style: normal;
+    src: url("./assets/fonts/inter/Inter_18pt-ExtraLight.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter Tight";
+    font-weight: 300;
+    font-style: normal;
+    src: url("./assets/fonts/inter/Inter_18pt-Light.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter Tight";
+    font-weight: 400;
+    font-style: normal;
+    src: url("./assets/fonts/inter/Inter_18pt-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter Tight";
+    font-weight: 500;
+    font-style: normal;
+    src: url("./assets/fonts/inter/Inter_18pt-Medium.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter Tight";
+    font-weight: 600;
+    font-style: normal;
+    src: url("./assets/fonts/inter/Inter_18pt-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter Tight";
+    font-weight: 700;
+    font-style: normal;
+    src: url("./assets/fonts/inter/Inter_18pt-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter Tight";
+    font-weight: 800;
+    font-style: normal;
+    src: url("./assets/fonts/inter/Inter_18pt-ExtraBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Inter Tight";
+    font-weight: 900;
+    font-style: normal;
+    src: url("./assets/fonts/inter/Inter_18pt-Black.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "urbanist";
+    font-weight: 100;
+    font-style: normal;
+    src: url("./assets/fonts/urbanist/Urbanist-Thin.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "urbanist";
+    font-weight: 200;
+    font-style: normal;
+    src: url("./assets/fonts/urbanist/Urbanist-ExtraLight.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "urbanist";
+    font-weight: 300;
+    font-style: normal;
+    src: url("./assets/fonts/urbanist/Urbanist-Light.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "urbanist";
+    font-weight: 400;
+    font-style: normal;
+    src: url("./assets/fonts/urbanist/Urbanist-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "urbanist";
+    font-weight: 500;
+    font-style: normal;
+    src: url("./assets/fonts/urbanist/Urbanist-Medium.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "urbanist";
+    font-weight: 600;
+    font-style: normal;
+    src: url("./assets/fonts/urbanist/Urbanist-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "urbanist";
+    font-weight: 700;
+    font-style: normal;
+    src: url("./assets/fonts/urbanist/Urbanist-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "urbanist";
+    font-weight: 800;
+    font-style: normal;
+    src: url("./assets/fonts/urbanist/Urbanist-ExtraBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "urbanist";
+    font-weight: 900;
+    font-style: normal;
+    src: url("./assets/fonts/urbanist/Urbanist-Black.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "vazir";
+    font-weight: 100;
+    font-style: normal;
+    src: url("./assets/fonts/vazir/Vazirmatn-Thin.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "vazir";
+    font-weight: 200;
+    font-style: normal;
+    src: url("./assets/fonts/vazir/Vazirmatn-ExtraLight.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "vazir";
+    font-weight: 300;
+    font-style: normal;
+    src: url("./assets/fonts/vazir/Vazirmatn-Light.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "vazir";
+    font-weight: 400;
+    font-style: normal;
+    src: url("./assets/fonts/vazir/Vazirmatn-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "vazir";
+    font-weight: 500;
+    font-style: normal;
+    src: url("./assets/fonts/vazir/Vazirmatn-Medium.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "vazir";
+    font-weight: 600;
+    font-style: normal;
+    src: url("./assets/fonts/vazir/Vazirmatn-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "vazir";
+    font-weight: 700;
+    font-style: normal;
+    src: url("./assets/fonts/vazir/Vazirmatn-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "vazir";
+    font-weight: 800;
+    font-style: normal;
+    src: url("./assets/fonts/vazir/Vazirmatn-ExtraBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "vazir";
+    font-weight: 900;
+    font-style: normal;
+    src: url("./assets/fonts/vazir/Vazirmatn-Black.ttf") format("truetype");
+}
+
+
+/* swiper-custom.css */
+.swiper-pagination-bullet {
+    background-color: #ccc !important;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 8px;
+    opacity: 0.5;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.swiper-pagination-bullet-active {
+    background: linear-gradient(to right, #1BAC4B, #46D375) !important;
+    width: 32px !important;
+    height: 12px;
+    border-radius: 20px !important;
+    opacity: 1; /* Fully visible active dot */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.auth-gradient {
+    background: linear-gradient(
+    150deg,
+    #FAFAFE 10%,
+    #313EC8 80%,
+    #12174A 100%
+    );
+}
+
+.drop-shadow-1 {
+    box-shadow: 0 -4px 4px 0 rgba(0, 0, 0, 0.1);
+}
+.drop-shadow-1 {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.fade-in_900 {
+    opacity: 0;
+    animation: fadeInAnimation 0.9s ease-in-out forwards;
+}
+
+.fade-in_1800 {
+    opacity: 0;
+    animation: fadeInAnimation 0.9s ease-in-out 0.9s forwards;
+}
+
+.fade-in_2700 {
+    opacity: 0;
+    animation: fadeInAnimation 0.9s ease-in-out 1.8s forwards;
+}
+
+
+.fade-in_3600 {
+    opacity: 0;
+    animation: fadeInAnimation 0.9s ease-in-out 2.7s forwards;
+}
+
+.fade-in_4500 {
+    opacity: 0;
+    animation: fadeInAnimation 0.9s ease-in-out 3.9s forwards;
+}
+
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
+
