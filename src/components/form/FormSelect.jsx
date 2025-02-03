@@ -4,6 +4,10 @@ import {Command, CommandEmpty, CommandGroup, CommandItem, CommandList,} from "./
 import {Popover, PopoverContent, PopoverTrigger,} from "./ui/Popover";
 import {useController, useFormContext} from "react-hook-form";
 import {useFormFieldContext} from "@/components/form/FormField.jsx";
+import Icon from "@/components/icons/Icon.jsx";
+import Icons from "@/lib/utils/Icons.js";
+import {useTranslation} from "react-i18next";
+
 
 export function FormSelect({
                                options = [],
@@ -15,16 +19,18 @@ export function FormSelect({
                                search,
                                disabled,
                                children,
-                               triggerChildren = ()=>{},
+                               onchange,
+                               triggerChildren = () => {
+                               },
                                ...props
                            }) {
     const {control} = useFormContext();
-    const {name , error} = useFormFieldContext();
+    const {name, error} = useFormFieldContext();
     const [triggerWidth, setTriggerWidth] = useState(null);
     const triggerRef = useRef(null);
     const [open, setOpen] = useState(false);
     const [searchValue, setSearchValue] = useState("");
-
+    const {t} = useTranslation();
     const {
         field: {value, onChange},
     } = useController({name, control});
@@ -55,29 +61,30 @@ export function FormSelect({
     return (
         <Popover open={open} onOpenChange={disabled ? null : setOpen} {...props}>
             <PopoverTrigger asChild ref={triggerRef}>
-                <div  className={'relative w-full flex items-center justify-center'}>
+                <div className={'relative w-full flex items-center justify-center border rounded-md border-gray-300'}>
                     <div
                         className={cn(
-                            "focus:border-primary-500 focus:bg-green-500/10 bg-greyScale-50 dark:bg-dark-dark2 dark:text-white-500 drop-shadow-sm rounded-2xl px-5 h-14 items-center flex my-auto placeholder:text-greyScale-500 placeholder:text-md  font-medium placeholder:font-normal w-full ", error ? "border-red-600" : '',
-                            triggerClassName, value ? '' : 'text-greyScale-500'
+                            "focus:border-gray-200 focus:bg-green-500/10 bg-white border-black dark:bg-dark-dark2 dark:text-white-500 drop-shadow-sm rounded-2xl p-5 h-14 items-center flex my-auto placeholder:text-greyScale-500 placeholder:text-md font-medium placeholder:font-normal w-full ", error ? "border-red-600" : '',
+                            triggerClassName, value ? '' : 'text-gray-500 border-black'
                         )}
                     >
                         {value
-                            ?  React.isValidElement(triggerChildren(optionValueObject))  ? triggerChildren(optionValueObject) :  options.find((option) => option.value === value)?.label
+                            ? React.isValidElement(triggerChildren(optionValueObject)) ? triggerChildren(optionValueObject) : options.find((option) => option.value === value)?.label
                             : placeholder}
                     </div>
 
-                    {/*<div className={cn('absolute flex items-center justify-center w-fit bottom-5 end-5' )}>*/}
-                    {/*    <Icon icon={Icons.Arrow_Down_2_Bold}*/}
-                    {/*          className={cn('text-greyScale-500 w-5 h-5', value && 'text-black-500 dark:text-white-500')}/>*/}
-                    {/*</div>*/}
+                    <div
+                        className={cn('absolute flex items-center justify-center w-fit bottom-5 end-5', open && 'rotate-180 transition-all duration-500 ')}>
+                        <Icon icon={Icons.arrow_down2_light_outline}
+                              className={cn('text-greyScale-500 w-5 h-5', value && 'text-greyScale-900 dark:text-white-500 ')}/>
+                    </div>
                 </div>
             </PopoverTrigger>
             <PopoverContent
                 style={{width: `${triggerWidth}px`}}
-                className={cn("h-full bg-white-500 dark:bg-dark-dark2 dark:text-white-500 p-0 dark:border-dark-dark3", contentClassName)}>
+                className={cn("h-full z-[300] bg-white dark:bg-dark-dark2 dark:text-white-500 p-0 dark:border-dark-dark3", contentClassName)}>
                 <Command>
-                {search ? (
+                    {search ? (
 
                             <input
                                 placeholder="Search..."
@@ -97,6 +104,7 @@ export function FormSelect({
                                     onSelect={() => {
                                         onChange(item.value);
                                         setOpen(false);
+                                        onchange(item?.value)
                                     }}
                                     className={cn(optionClassName)}
                                 >

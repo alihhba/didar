@@ -9,7 +9,7 @@ const SectionTitle = ({title, path , renderStart= ()=>{} , renderEnd = ()=>{}, c
     return (
         <button
             onClick={() => {
-                navigate(`/${path}`);
+                !renderEnd &&   navigate(`/${path}`);
             }}
             className={cn('flex items-center mb-4 border-b pb-2 border-gray-400 justify-between w-full', className)} {...props}>
 

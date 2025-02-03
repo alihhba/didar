@@ -16,12 +16,14 @@ import tasks from '@/assets/icons/tasks.svg'
 import eidt from '@/assets/icons/edit.svg'
 import plus from '@/assets/icons/plus.svg'
 import send from '@/assets/icons/send.svg'
+import close from '@/assets/icons/close.svg'
 
 
 
 
 
 const icons = {
+    close: close,
     send:send,
     plus: plus,
     edit: eidt,

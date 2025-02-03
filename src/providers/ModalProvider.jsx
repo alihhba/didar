@@ -4,6 +4,8 @@ import FullPageModal from '../components/modals/layouts/FullPageModal.jsx';
 import {useModal} from '@/context/modalContext.jsx';
 import ProfessorFilterModal from "@/components/modals/ProfessorFilterModal.jsx";
 import LogoutModal from "@/components/modals/LogoutModal.jsx";
+import CenterPageModal from "@/components/modals/layouts/CenterPageModal.jsx";
+import AddEditEventModal from "@/components/modals/AddEditEventModal.jsx";
 
 
 export const ModalProviders = () => {
@@ -37,6 +39,14 @@ export const ModalProviders = () => {
             >
                 <LogoutModal/>
             </FullPageModal>
+
+
+            <CenterPageModal modalName={'add-edit-event'}>
+                <div className={'bg-white p-4 rounded-3xl'}>
+
+                <AddEditEventModal/>
+                </div>
+            </CenterPageModal>
 
 
             {/* background */}

@@ -1,12 +1,13 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import useCalender from "@/hooks/useCalender.jsx";
 import {cn} from "@/lib/utils/index.jsx";
-import {ChevronLeft, ChevronRight} from "lucide-react";
 import moment from "jalali-moment";
 
-const WeekGunChartCalender = ({calenderType = 'en'}) => {
+const WeekGunChartCalender = ({calenderType = 'en' , tasksData}) => {
     const [selectedDay, setSelectedDay] = useState(null);
     const scrollContainerRef = useRef(null);
+    const [dayIndex , setDayIndex] = useState(null)
+
 
     console.log(selectedDay)
 
@@ -30,10 +31,9 @@ const WeekGunChartCalender = ({calenderType = 'en'}) => {
     }, [selectedDay, week]);
 
     // Fake task data
-    const tasks = [
-        {title: "test 1", start: "2025-02-02T09:00", end: "2025-02-02T11:00"},
-        {title: "test 1", start: "2025-01-30T11:00", end: "2025-01-30T12:00"},
-
+    const tasks = tasksData || [
+        {title: "test 1", start: "2025-02-02T09:00", end: "2025-02-02T11:00" },
+        {title: "test 1", start: "2025-02-03T11:00", end: "2025-02-03T12:00" , day_of_week:3},
     ];
 
     const getTaskStyles = (task) => {
@@ -58,13 +58,13 @@ const WeekGunChartCalender = ({calenderType = 'en'}) => {
             className={cn('w-full relative bg-white p-4 pt-2  md:border flex flex-col rounded-md h-full grow min-h-full  ')}>
             {/*header*/}
             <div className={'sticky bg-white -mx-4 px-4 top-[56px] py-2 z-10 '}>
-                <div onClick={()=>{
-                    handleNextWeek()
-                }}>
-                    next
-                </div>
+                {/*<div onClick={()=>{*/}
+                {/*    handleNextWeek()*/}
+                {/*}}>*/}
+                {/*    next*/}
+                {/*</div>*/}
                 {/*days header*/}
-                <WeekGunChartCalender.DaysHeader headerDays={headerDays} setSelectedDay={setSelectedDay} isDesktop={isDesktop}
+                <WeekGunChartCalender.DaysHeader headerDays={headerDays} setSelectedDay={setSelectedDay} setDayIndex={setDayIndex} isDesktop={isDesktop}
                                      selectedDay={selectedDay}/>
             </div>
 
@@ -116,20 +116,14 @@ const WeekGunChartCalender = ({calenderType = 'en'}) => {
                                     const columnDate = new Date(moment(item?.dayDate , 'jYYYY-jMM-jDD').format('YYYY-MM-DD')).toDateString();
 
                                     // moment.locale("fa");
-                                    const miladiDate = task.start;
-                                    const persianDayName = moment(miladiDate, "YYYY-MM-DDTHH:mm").format("dddd");
-                                    const persianColumnName = moment(columnDate, "YYYY-MM-DDTHH:mm").format("dddd");
+                                    // const miladiDate = task.start;
+                                    // const persianDayName = moment(miladiDate, "YYYY-MM-DDTHH:mm").format("dddd");
+                                    // const persianColumnName = moment(columnDate, "YYYY-MM-DDTHH:mm").format("dddd");
 
-                                    console.log(selectedDay?.split('/')[0])
-                                    console.log(miladiDate)
-
-                                    console.log(persianDayName ,taskDate  )
-                                    console.log(persianColumnName , columnDate)
-                                    console.log('-------------')
 
                                     moment.locale("en");
 
-                                    if ((isDesktop ? taskDate === columnDate : task?.start?.slice(0, 10) === selectedDay?.split('/')[0]) || persianDayName === persianColumnName )   {
+                                    if ((isDesktop ? taskDate === columnDate : task?.start?.slice(0, 10) === selectedDay?.split('/')[0]) || dayIndex === task?.day_of_week)   {
                                         return (
                                             <WeekGunChartCalender.TaskCard getTaskStyles={getTaskStyles} task={task}
                                                                taskIndex={taskIndex}/>
@@ -161,14 +155,28 @@ WeekGunChartCalender.TaskCard = ({taskIndex, task, getTaskStyles}) => {
         >
 
             {/* custom card */}
-            <div className={'bg-blue-100 rounded-md h-full border w-full p-2'}>
-                {task.title}
+            <div className={'bg-[#E6F9EA] flex gap-2 bg-opacity- rounded-md h-full  w-full p-2'}>
+                <div className={'border-s-2 rounded-full border-[#00BF23] h-full'}>
+
+                </div>
+                <div className={'flex flex-col gap-1'}>
+                    <div className={'flex items-center gap-1 text-sm text-[#00BF23]'}>
+                        <span>{task?.start.slice(11, 16)}</span>
+                        <span>-</span>
+                        <span>{task?.end.slice(11, 16)}</span>
+
+                    </div>
+                    <p className={'text-md text-gray-900 font-medium'}>
+
+                    {task.title}
+                    </p>
+                </div>
             </div>
         </div>
     )
 }
 
-WeekGunChartCalender.DaysHeader = ({headerDays, isDesktop, selectedDay, setSelectedDay}) => {
+WeekGunChartCalender.DaysHeader = ({headerDays, isDesktop, selectedDay, setSelectedDay  , setDayIndex}) => {
     const dayRefs = useRef([]);
 
     useEffect(() => {
@@ -198,6 +206,7 @@ WeekGunChartCalender.DaysHeader = ({headerDays, isDesktop, selectedDay, setSelec
                         ref={el => (dayRefs.current[index] = el)}
                         onClick={() => {
                             if (!isDesktop) setSelectedDay(`${moment(item?.dayDate , 'jYYYY-jMM-jDD').format('YYYY-MM-DD')}/${item?.dayName}`)
+                            setDayIndex(index+1)
                         }}
                         className={cn(
                             'border text-sm bg-white font-medium border-gray-300 text-gray-800 h-10 flex rounded justify-center items-center self-center min-h-10 ',

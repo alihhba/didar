@@ -20,9 +20,11 @@ import profile_info_vector from '@/assets/images/profile-info-vector.svg'
 import profile_professor_vector from '@/assets/images/profile-professor-vector.svg'
 import bubble_left from '@/assets/icons/bubble-left.svg'
 import bubble_right from '@/assets/icons/bubble-right.svg'
+import google_calender from '@/assets/icons/google-calender.svg'
 
 
 const images = {
+    google_calender: google_calender,
     bubble_left: bubble_left,
     bubble_right:bubble_right,
     profile_professor_vector : profile_professor_vector,

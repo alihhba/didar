@@ -7,6 +7,7 @@ import ProfessorInfoCard from "@/components/card/ProfessorInfoCard.jsx";
 import InfoBox from "@/components/box/InfoBox.jsx";
 import useGetInstructorById from "@/hooks/useGetInstructorById.jsx";
 import WeekGunChartCalender from "@/components/calenders/WeekGunChartCalender.jsx";
+import useGetTasksByInstructorId from "@/hooks/useGetTasksByInstructorId.jsx";
 
 
 const ProfessorPage = () => {
@@ -15,8 +16,17 @@ const ProfessorPage = () => {
     const {id} = useParams();
     const professorData = state?.data;
     const {instructor } = useGetInstructorById(id)
+    const {tasks} = useGetTasksByInstructorId(id)
+    // title: "test 1", start: "2025-02-02T09:00", end: "2025-02-02T11:00"
 
-    console.log(instructor)
+    const tasksData = tasks?.data?.results.map((a)=>{
+        return ({
+            title: a?.title,
+            start:`1900-02-02T${a?.start_time}`,
+            end:`1900-02-02T${a?.end_time}`,
+            day_of_week:a?.day_of_week
+        })
+    })
 
     return (
         <Page>
@@ -54,7 +64,7 @@ const ProfessorPage = () => {
                 </div>
 
                 <div className={'mt-6 border border-gray-200 rounded-md'}>
-                    <WeekGunChartCalender calenderType={'fa'}/>
+                    <WeekGunChartCalender calenderType={'fa'} tasksData={tasksData}/>
                 </div>
 
             </Page.Content>
