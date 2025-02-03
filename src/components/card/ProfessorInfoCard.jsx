@@ -17,6 +17,8 @@ const ProfessorInfoCard = ({data, className, ...props}) => {
         profile_photo: image
     } = data || {}
 
+    console.log(data)
+
 
     return (
         <div
@@ -55,7 +57,7 @@ const ProfessorInfoCard = ({data, className, ...props}) => {
             <div className={'mt-6'}>
                 <Button
                     onClick={()=>{
-                        navigate(`/message/${id}/new`)
+                        navigate(`/message/${id}/new` , {state: {data:data}})
                     }}
                     style={'primary'}>
                     <div className={'flex items-center gap-2 justify-center flex-row-reverse'}>

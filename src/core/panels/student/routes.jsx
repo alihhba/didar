@@ -12,6 +12,7 @@ import MessagesPage from "@/pages/message/MessagesPage.jsx";
 import MessagePage from "@/pages/message/MessagePage.jsx";
 import ProfessorProfilePage from "@/pages/professor/ProfessorProfilePage.jsx";
 import TasksPage from "@/pages/tasks/TasksPage.jsx";
+import NewMessagePage from "@/pages/message/NewMessagePage.jsx";
 
 const GuestRoutes = () => {
     const {isSplash, isRegister} = useRegister();
@@ -40,7 +41,7 @@ const GuestRoutes = () => {
                     <Route path="/professor/:id" element={<ProfessorPage/>}/>
                     <Route path="/messages" element={<MessagesPage/>}/>
                     <Route path="/message/:id" element={<MessagePage/>}/>
-                    <Route path="/message/:id/new" element={<MessagePage/>}/>
+                    <Route path="/message/:id/new" element={<NewMessagePage/>}/>
 
 
                     {!isInstructor ? (

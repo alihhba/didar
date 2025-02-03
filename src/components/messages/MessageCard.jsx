@@ -9,6 +9,8 @@ const MessageCard = ({data}) => {
     const lastMessageData = ticket?.data?.messages?.pop();
     const navigate = useNavigate();
 
+    console.log(ticket)
+
 
     return (
         <div
