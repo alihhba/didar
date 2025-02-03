@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 const UseRegister = () => {
     const { isSplash, navigateTo } = useSplash(5400);
     const location = useLocation();
-    const isRegister = localStorage.getItem('register') || false;
+    const isRegister = JSON.parse(localStorage.getItem('user-data'))?.access || false;
 
     const allowedRoutesForUnregistered = ['/auth'];
     const isCurrentRouteAllowed = allowedRoutesForUnregistered.includes(location.pathname);

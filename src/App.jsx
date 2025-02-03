@@ -9,6 +9,7 @@ import "@/i18next.js"
 import panels from "./core/panels";
 import ContextProvider from "@/providers/contextProvider.jsx";
 import ModalProviders from "@/providers/ModalProvider.jsx";
+import {  ToastContainer } from 'react-toastify';
 
 function App() {
     const [role] = useState(localStorage.getItem("role") || "student");
@@ -29,6 +30,10 @@ function App() {
             >
                 <ContextProvider>
                     <ModalProviders/>
+                    <ToastContainer
+                    className={'w-[95dvw] p-4'}
+                    icon={false}
+                    />
                     <Routes/>
                 </ContextProvider>
             </Refine>

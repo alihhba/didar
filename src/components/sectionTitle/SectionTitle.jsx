@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import Icon from "@/components/icons/Icon.jsx";
 import icons from "@/lib/utils/icons.js";
 
-const SectionTitle = ({title, path, className, ...props}) => {
+const SectionTitle = ({title, path , renderStart= ()=>{} , renderEnd = ()=>{}, className, ...props}) => {
     const navigate = useNavigate()
     return (
         <button
@@ -13,7 +13,19 @@ const SectionTitle = ({title, path, className, ...props}) => {
             }}
             className={cn('flex items-center mb-4 border-b pb-2 border-gray-400 justify-between w-full', className)} {...props}>
 
+            {renderStart ? (
+                <div className={'text-lg text-gray-900 font-medium'}>
+                    {renderStart()}
+                </div>
+            ): (
             <p className={'text-lg text-gray-900 font-medium'}>{title}</p>
+            )}
+
+            {renderEnd  ? (
+                <div className={'text-main-900 font-medium text-md'}>
+                    {renderEnd()}
+                </div>
+            ) : null}
 
             {path ? (
                 <div className={'flex items-center gap-2'}>

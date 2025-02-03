@@ -15,7 +15,7 @@ import TasksPage from "@/pages/tasks/TasksPage.jsx";
 
 const GuestRoutes = () => {
     const {isSplash, isRegister} = useRegister();
-    const isInstructor = true;
+    const isInstructor = JSON.parse(localStorage.getItem('user-data'))?.is_instructor;
 
     // splash
     if (isSplash) {
@@ -40,6 +40,8 @@ const GuestRoutes = () => {
                     <Route path="/professor/:id" element={<ProfessorPage/>}/>
                     <Route path="/messages" element={<MessagesPage/>}/>
                     <Route path="/message/:id" element={<MessagePage/>}/>
+                    <Route path="/message/:id/new" element={<MessagePage/>}/>
+
 
                     {!isInstructor ? (
                         <Route path="/student" element={<StudentProfilePage/>}/>

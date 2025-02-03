@@ -13,11 +13,18 @@ import search_book from '@/assets/icons/search-book.svg'
 import loguot from '@/assets/images/logout.svg'
 import tasks_menu from '@/assets/icons/tasks-menu.svg'
 import tasks from '@/assets/icons/tasks.svg'
+import eidt from '@/assets/icons/edit.svg'
+import plus from '@/assets/icons/plus.svg'
+import send from '@/assets/icons/send.svg'
+
 
 
 
 
 const icons = {
+    send:send,
+    plus: plus,
+    edit: eidt,
     tasks:tasks,
     tasks_menu:tasks_menu,
     eye_slash: eye_slash,

@@ -18,8 +18,13 @@ import logo_name from '@/assets/images/logo_name.svg'
 import default_avatar from '@/assets/images/default-avatar.png'
 import profile_info_vector from '@/assets/images/profile-info-vector.svg'
 import profile_professor_vector from '@/assets/images/profile-professor-vector.svg'
+import bubble_left from '@/assets/icons/bubble-left.svg'
+import bubble_right from '@/assets/icons/bubble-right.svg'
+
 
 const images = {
+    bubble_left: bubble_left,
+    bubble_right:bubble_right,
     profile_professor_vector : profile_professor_vector,
     logo: logo,
     logo_2: logo_2,

@@ -1,11 +1,19 @@
 import React from "react";
 import Page from "@/layouts/page/Page.jsx";
 import SectionTitle from "@/components/sectionTitle/SectionTitle.jsx";
-import UserInfo from "@/components/userInfo/UserInfo.jsx";
-import images from "@/lib/utils/images.js";
 import ProfessorCard from "@/components/card/ProfessorCard.jsx";
+import Loading from "@/components/Loading.jsx";
+import useFetchData from "@/hooks/useFetchData.jsx";
 
 const HomePage = () => {
+    // const {data: facultiesData} = useFetchData('http://localhost:8888/api/v1/faculties/');
+    // const {departments} = useFetchDepartmentsByFaculties();
+    // const {instructors, error: instructorsError, loading: instructorsLoading} =
+    //     useFetchInstructorsByDepartments(departments);
+    const {data : instructors, loading : instructorsLoading} = useFetchData( 'http://localhost:8888/api/v1/instructors/')
+
+    if (instructorsLoading) return <Loading/>
+
     return <Page className={''}>
         <Page.Header/>
         <Page.Content>
@@ -13,66 +21,26 @@ const HomePage = () => {
             {/*professors*/}
             <SectionTitle path={'professors'} title={'اساتید دانشکده'}/>
 
-          <div className={'flex flex-col gap-2'}>
-              <ProfessorCard data={{
-                  name: 'فرشاد صفائی سمنانی',
-                  orientation: 'معماری کامپیوتر و شبکه',
-                  image: images.avatar_1,
-                  academic_rank: 'دانشیار'
-              }}/>
+            <div className={'flex flex-col gap-2'}>
+                {instructors?.data?.results?.slice(0,6)?.map((item)=>{
+                    return (
+                        <ProfessorCard data={item}/>
+                    )
+                })}
 
-              <ProfessorCard data={{
-                  name: 'فرشاد صفائی سمنانی',
-                  orientation: 'معماری کامپیوتر و شبکه',
-                  image: images.avatar_1,
-                  academic_rank: 'دانشیار'
-              }}/>
-
-              <ProfessorCard data={{
-                  name: 'فرشاد صفائی سمنانی',
-                  orientation: 'معماری کامپیوتر و شبکه',
-                  image: images.avatar_1,
-                  academic_rank: 'دانشیار'
-              }}/>
-
-          </div>
+            </div>
             {/*section two*/}
             <SectionTitle className={'pt-4'} path={'professors'} title={'امروز حضور دارند ...'}/>
 
             <div className={'w-screen flex gap-2 overflow-x-auto px-6  -mx-6'}>
-                <ProfessorCard
-                    type={'secondary'}
-                    data={{
-                        name: 'فرشاد صفائی سمنانی',
-                        orientation: 'معماری کامپیوتر و شبکه',
-                        image: images.avatar_1,
-                        academic_rank: 'دانشیار'
-                    }}/>
 
-                <ProfessorCard
-                    type={'secondary'}
-                    data={{
-                        name: 'فرشاد صفائی سمنانی',
-                        orientation: 'معماری کامپیوتر و شبکه',
-                        image: images.avatar_1,
-                        academic_rank: 'دانشیار'
-                    }}/>
-                <ProfessorCard
-                    type={'secondary'}
-                    data={{
-                        name: 'فرشاد صفائی سمنانی',
-                        orientation: 'معماری کامپیوتر و شبکه',
-                        image: images.avatar_1,
-                        academic_rank: 'دانشیار'
-                    }}/>
-                <ProfessorCard
-                    type={'secondary'}
-                    data={{
-                        name: 'فرشاد صفائی سمنانی',
-                        orientation: 'معماری کامپیوتر و شبکه',
-                        image: images.avatar_1,
-                        academic_rank: 'دانشیار'
-                    }}/>
+                {instructors?.data?.results?.slice(0,6)?.map((item)=>{
+                    return (
+                        <ProfessorCard
+                            type={'secondary'}
+                            data={item}/>
+                    )
+                })}
             </div>
         </Page.Content>
     </Page>;

@@ -8,7 +8,8 @@ const FixedMenu = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const pathname = location.pathname;
-    const isInstructor = true;
+    const isInstructor = JSON.parse(localStorage.getItem('user-data'))?.is_instructor;
+
 
     const menuItems = [
         {

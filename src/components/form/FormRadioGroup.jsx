@@ -22,14 +22,14 @@ export function FormRadioGroup({
     const [selected, setSelected] = useState( defaultSelected?.id|| null);
 
     return (
-        <div className={cn('flex w-full flex-col gap', className)} {...props}>
+        <div className={cn('flex w-full flex-col gap-4 mt-2', className)} {...props}>
             {filteredData.map((option) => {
-                const isActive = +selected === +option.id;
+                const isActive = selected === option.id;
 
                 return (
                     <label
                         key={option.value}
-                        className={cn("flex items-center  justify-between  gap-2 cursor-pointer select-none w-full",rowClassName)}
+                        className={cn("flex items-center w-full flex-row-reverse  justify-between  gap-2 cursor-pointer select-none ",rowClassName)}
                         onClick={() => {
                             setSelected(option?.id);
                         }}
@@ -45,13 +45,13 @@ export function FormRadioGroup({
                         {!children ? (
 
                             <div
-                                className={cn("w-5 h-5 min-h-5 min-w-5  flex  items-center justify-center bg- rounded-full transition-colors duration-200 border-[3px] border-primary-500   ")}>
+                                className={cn("w-5 h-5 min-h-5 min-w-5  flex  items-center justify-center bg- rounded-full transition-colors duration-200 border-[3px] border-primary-500   " , isActive && 'border-purple-950')}>
                                 <div
-                                    className={cn("w-3 h-3 min-w-3 max-w-3 min-h-3 max-h-3  bg-primary-500 hidden   border border-white-500 dark:border-dark-dark1  rounded-full", isActive && ' flex')}></div>
+                                    className={cn("w-3 h-3 min-w-3 max-w-3 min-h-3 max-h-3  bg-primary-500 hidden   border border-white-500 dark:border-dark-dark1  rounded-full", isActive && 'bg-purple-950 flex')}></div>
                             </div>
                         ) : null}
 
-                        <div className={cn('flex w-full items-center ', optionClassName)}>
+                        <div className={cn('flex w-fit items-center justify-between  ', optionClassName)}>
                             <div
                                 className={`text-gray-700  dark:text-white-500 w-full ${notActive?.includes(option?.value || filteredData?.slug || option?.id) ? 'opacity-50 cursor-not-allowed' : ''}`}>
                                 {children ? children({option, isSelected: selected}) : option.label}

@@ -2,31 +2,21 @@ import React from 'react';
 import Page from "@/layouts/page/Page.jsx";
 import icons from "@/lib/utils/icons.js";
 import Icon from "@/components/icons/Icon.jsx";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 import ProfessorInfoCard from "@/components/card/ProfessorInfoCard.jsx";
 import InfoBox from "@/components/box/InfoBox.jsx";
-import images from "@/lib/utils/images.js";
-
-
+import useGetInstructorById from "@/hooks/useGetInstructorById.jsx";
+import WeekGunChartCalender from "@/components/calenders/WeekGunChartCalender.jsx";
 
 
 const ProfessorPage = () => {
     const navigate = useNavigate();
+    const {state} = useLocation();
+    const {id} = useParams();
+    const professorData = state?.data;
+    const {instructor } = useGetInstructorById(id)
 
-    const data = {
-        firstName: 'فرشاد',
-        lastName: 'صفائی سمنانی',
-        academicRank: 'دانشیار',
-        department: 'معماری کامپیوتر و شبکه',
-        faculty: " مهندسی و علوم کامپیوتر",
-        roomNumber: '302',
-        email: 'f_safaei@sbu.ac.ir',
-        phone: '۲۹۹۰۴۱۸۳',
-        bio: 'مدلسازی سامانه‌های کامپیوتری\n' +
-            'سامانه‌های پیشرفته حافظه\n' +
-            'شبکه‌های پیچیده',
-        image: images.avatar_1
-    }
+    console.log(instructor)
 
     return (
         <Page>
@@ -39,7 +29,7 @@ const ProfessorPage = () => {
             </Page.Header>
             <Page.Content>
                 <div>
-                    <ProfessorInfoCard data={data}/>
+                    <ProfessorInfoCard data={{...instructor,...professorData}}/>
                 </div>
 
 
@@ -47,20 +37,24 @@ const ProfessorPage = () => {
                     <InfoBox title={'تماس'} icon={icons.phone}>
                         <div className={'flex flex-col gap-y-2'}>
 
-                        <p className={'text-sm font-normal text-gray-700'}>
+                            <p className={'text-sm font-normal text-gray-700'}>
                             <span
-                                className={'text-sm font-semibold text-gray-800'}>شماره تماس:</span>{data?.phone}</p>
-                        <p className={'text-sm font-normal text-gray-700'}>
+                                className={'text-sm font-semibold text-gray-800'}>شماره تماس:</span>{instructor?.data?.room_phone}</p>
+                            <p className={'text-sm font-normal text-gray-700'}>
                             <span
-                                className={'text-sm font-semibold text-gray-800'}>ایمیل:</span> {data?.email}</p>
+                                className={'text-sm font-semibold text-gray-800'}>ایمیل:</span> {instructor?.data?.email}</p>
                         </div>
                     </InfoBox>
                     <InfoBox title={'علایق پژوهشی'} icon={icons.search_book}>
                         <p className={'text-sm/6 text-gray-700 font-normal'}>
 
-                        {data?.bio}
+                            {instructor?.data?.bio}
                         </p>
                     </InfoBox>
+                </div>
+
+                <div className={'mt-6 border border-gray-200 rounded-md'}>
+                    <WeekGunChartCalender calenderType={'fa'}/>
                 </div>
 
             </Page.Content>

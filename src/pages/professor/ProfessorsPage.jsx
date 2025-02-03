@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Page from "@/layouts/page/Page.jsx";
 import Icon from "@/components/icons/Icon.jsx";
 import images from "@/lib/utils/images.js";
@@ -7,72 +7,29 @@ import {useModal} from "@/context/modalContext.jsx";
 import ProfessorCard from "@/components/card/ProfessorCard.jsx";
 import CustomSearchBox from "@/components/ui/CustomSearchBox.jsx";
 import useQuery from "@/hooks/useQuery.jsx";
-
-
-const professors = [
-    {
-        id: 1 ,
-        name: "فرشاد صفائی سمنانی",
-        orientation: "معماری کامپیوتر و شبکه",
-        image: images.avatar_1,
-        academic_rank: "دانشیار"
-    },
-    {
-        id:2,
-        name: "مجتبی وحیدی اصل",
-        orientation: "معماری کامپیوتر و شبکه",
-        image: images.avatar_1,
-        academic_rank: "دانشیار"
-    },
-    {
-        id:3,
-        name: "مائده مشرف دهکردی",
-        orientation: "معماری کامپیوتر و شبکه",
-        image: images.avatar_1,
-        academic_rank: "دانشیار"
-    },
-    {
-        id:4,
-        name: "فرشاد صفائی سمنانی",
-        orientation: "معماری کامپیوتر و شبکه",
-        image: images.avatar_1,
-        academic_rank: "دانشیار"
-    },
-    {
-        id:5,
-        name: "فرشاد صفائی سمنانی",
-        orientation: "معماری کامپیوتر و شبکه",
-        image: images.avatar_1,
-        academic_rank: "دانشیار"
-    },
-    {
-        id:6,
-        name: "فرشاد صفائی سمنانی",
-        orientation: "معماری کامپیوتر و شبکه",
-        image: images.avatar_1,
-        academic_rank: "دانشیار"
-    },
-    {
-        id:7,
-        name: "فرشاد صفائی سمنانی",
-        orientation: "معماری کامپیوتر و شبکه",
-        image: images.avatar_1,
-        academic_rank: "دانشیار"
-    },
-    {
-        id:8,
-        name: "فرشاد صفائی سمنانی",
-        orientation: "معماری کامپیوتر و شبکه",
-        image: images.avatar_1,
-        academic_rank: "دانشیار"
-    }
-];
-
+import useFetchData from "@/hooks/useFetchData.jsx";
+import Loading from "@/components/Loading.jsx";
 
 const ProfessorsPage = () => {
     const {changeModalHandler} = useModal();
     const {getQuery} = useQuery();
-    const  q = getQuery('q') || '';
+    const q = getQuery('q') || '';
+
+    const {data: instructor, loading, refetch} = useFetchData('http://localhost:8888/api/v1/instructors/', {
+        params: {
+            department__faculty: getQuery('department__faculty'),
+            department: getQuery('department'),
+        }
+    });
+
+    useEffect(() => {
+        refetch();
+    }, [
+        getQuery('department'), getQuery('department__faculty')
+    ])
+
+    if (loading) return <Loading/>;
+
     return (
         <Page>
             <Page.Header>
@@ -93,11 +50,13 @@ const ProfessorsPage = () => {
             <Page.Content>
                 <div>
                     <div className={'flex flex-col gap-2'}>
-                        {professors.filter(p => p.name.includes(q)).map((item) => {
-                            return (
-                                <ProfessorCard data={item}/>
-                            )
-                        })}
+                        {instructor?.data?.results?.length === 0 ?
+                            <div className={'w-full text-center'}>موردی یافت نشد.</div>
+                            : instructor?.data?.results.filter(p => p.name?.toLowerCase().includes(q?.toString()?.toLowerCase())).map((item) => {
+                                return (
+                                    <ProfessorCard data={item}/>
+                                )
+                            })}
                     </div>
                 </div>
             </Page.Content>

@@ -1,6 +1,5 @@
 import React from 'react';
 import UserInfo from "@/components/userInfo/UserInfo.jsx";
-import images from "@/lib/utils/images.js";
 
 const ProfileInfo = ({data , icon}) => {
 

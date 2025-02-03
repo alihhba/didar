@@ -5,39 +5,47 @@ import Tag from "@/components/tag/Tag.jsx";
 import Button from "@/components/ui/Button.jsx";
 import icons from "@/lib/utils/icons.js";
 import Icon from "@/components/icons/Icon.jsx";
+import {useNavigate, useParams} from "react-router-dom";
 
 const ProfessorInfoCard = ({data, className, ...props}) => {
+    const {id } = useParams();
+    const navigate = useNavigate();
     const {
-        firstName,
+        name: firstName,
         lastName,
-        academicRank,
-        department,
-        faculty,
-        roomNumber,
-        image
+        rank: academicRank,
+        profile_photo: image
     } = data || {}
+
+
     return (
         <div
             className={cn('p-4 w-full  bg-white flex flex-col  rounded-xl overflow-hidden border border-gray-300', className)} {...props}>
 
-            <div className={'flex items-center grow    overflow-hidden'}>
+            <div className={'flex items-center grow  '}>
                 <div className={'w-30 min-h-30 min-w-30 me-6  h-30  rounded-xl overflow-hidden '}>
-                    <img src={image} alt={firstName} className={'w-full h-full'}/>
+                    <img src={image || images.default_avatar} alt={firstName} className={'w-full h-full'}/>
                 </div>
 
                 <div className={'flex  flex-col gap-y-2 justify-between h-30 grow'}>
-                    <p className={'line-clamp-1 text-[1rem] text-gray-900  font-medium'}>{firstName} {lastName}</p>
+                    <p className={'line-clamp-1 text-[1rem]  text-gray-900  font-medium'}>{firstName} {lastName}</p>
                     <p className={'text-sm font-normal text-gray-700'}><span
-                        className={'text-sm font-semibold text-gray-800'}>دانشکده:</span>{faculty}</p>
+                        className={'text-sm font-semibold text-gray-800'}>دانشکده:</span>{data?.data?.department?.faculty?.name}
+                    </p>
                     <p className={'text-sm font-normal text-gray-700'}><span
-                        className={'text-sm font-semibold text-gray-800'}> گروه آموزشی:</span> {department}</p>
+                        className={'text-sm font-semibold text-gray-800'}> گروه آموزشی:</span> {data?.data?.department?.name}
+                    </p>
                     <div className={'flex items-center gap-x-2'}>
-                        <Tag>{academicRank}</Tag>
-                        <Tag>
-                            <div className={'flex items-center gap-1'}>
-                                <span>اتاق</span> {roomNumber}
-                            </div>
-                        </Tag>
+                        {academicRank ? (
+                            <Tag>{academicRank}</Tag>
+                        ) : null}
+                        {data?.data?.room_number ? (
+                            <Tag>
+                                <div className={'flex items-center gap-1'}>
+                                    <span>اتاق</span> {data?.data?.room_number}
+                                </div>
+                            </Tag>
+                        ) : null}
 
                     </div>
                 </div>
@@ -45,7 +53,11 @@ const ProfessorInfoCard = ({data, className, ...props}) => {
             </div>
 
             <div className={'mt-6'}>
-                <Button style={'primary'} >
+                <Button
+                    onClick={()=>{
+                        navigate(`/message/${id}/new`)
+                    }}
+                    style={'primary'}>
                     <div className={'flex items-center gap-2 justify-center flex-row-reverse'}>
                         <p className={'text-white font-semibold text-[14px]'}>پیام به استاد</p>
                         <Icon icon={icons.message} className={'w-5 h-5'}/>

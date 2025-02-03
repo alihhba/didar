@@ -274,3 +274,35 @@ body {
 
 
 
+.message-box {
+    position: relative;
+}
+
+/* For your own messages (triangle on the right side) */
+.message-box--mine::after {
+    content: "";
+    position: absolute;
+    right: -8px; /* Adjust as needed */
+    top: 10px;   /* Adjust vertical position as needed */
+    border-width: 8px 0 8px 8px; /* Top, right, bottom, left */
+    border-style: solid;
+    /* Replace "#1e3a8a" with your actual bg-tint_main-700 color if needed */
+    border-color: transparent transparent transparent #1e3a8a;
+}
+
+/* For messages from others (triangle on the left side) */
+.message-box--not-mine::after {
+    content: "";
+    position: absolute;
+    left: -8px;  /* Adjust as needed */
+    top: 10px;   /* Adjust vertical position as needed */
+    border-width: 8px 8px 8px 0; /* Top, right, bottom, left */
+    border-style: solid;
+    /* Replace "#e0e7ff" with your actual bg-tint_main-200 color if needed */
+    border-color: transparent #000 transparent transparent;
+}
+
+
+
+
+
