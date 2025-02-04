@@ -29,6 +29,7 @@ const AddEditEventModal = () => {
                 start_time: `${start}:00`,
                 end_time: `${end}:00`
             }
+            // console.log(payload)
             await postShedule(payload)
 
             changeModalHandler({isModal:false})
@@ -121,13 +122,14 @@ const AddEditEventModal = () => {
 placeholder={'شنبه'}
                                 onchange  ={ (e)=>{
                                     setSelectedDate(e)
+
                                 }}
                                 options={[
                                 {id: 1 , value: 1 , label:'شنبه'},
-                                    {id: 2 , value: 1 , label:'یکشنبه'},
-                                    {id: 3 , value: 1 , label:'دوشنبه'},
-                                    {id: 4 , value: 1 , label:'سهشنبه'},
-                                    {id: 5 , value: 1 , label:'چهارشنبه'},
+                                    {id: 2 , value: 2 , label:'یکشنبه'},
+                                    {id: 3 , value: 3 , label:'دوشنبه'},
+                                    {id: 4 , value: 4 , label:'سهشنبه'},
+                                    {id: 5 , value: 5 , label:'چهارشنبه'},
 
                             ]}/>
                         </Form.Field>

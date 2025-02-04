@@ -8,9 +8,6 @@ const WeekGunChartCalender = ({calenderType = 'en' , tasksData}) => {
     const scrollContainerRef = useRef(null);
     const [dayIndex , setDayIndex] = useState(null)
 
-
-    console.log(selectedDay)
-
     const {isDesktop} = false;
     const {
         getCurrentWeekDays,

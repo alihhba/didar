@@ -36,11 +36,10 @@ const AuthPage = () => {
             );
             console.log("Login successful:", response.data);
             localStorage.setItem('user-data'  ,JSON.stringify(response.data?.data))
-            const token = JSON.parse(localStorage.getItem('user-data'))?.access;
+            // console.log(response.data?.data?.is_instructor)
             if(response.data?.data?.is_instructor){
                 window.open('http://localhost:8888/google-auth/login/google-oauth2' )
                 navigate('/home');
-
             }else{
             navigate('/home');
             }
